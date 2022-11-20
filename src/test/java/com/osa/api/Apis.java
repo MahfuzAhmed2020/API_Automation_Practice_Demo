@@ -101,7 +101,7 @@ public class Apis {
 	    AppContains.LOG.info("This is get call Response "+Format.prettyPrint(res_get));
 	    
 	    //PATCH
-	    String patch_url="/customers/"+res_post.jsonPath().get("_id");
+	    String patch_url="/customers/"+res_post.jsonPath().get("_id"); 
 	   // String patch_url= "/customers/"+"606c6d57e59e500017a120ac";
 	    AppContains.LOG.info("This is the Patch call Payload "+Format.prettyPrint(payload_patch));
 	    AppContains.LOG.info("This is the Patch call URL "+patch_url);

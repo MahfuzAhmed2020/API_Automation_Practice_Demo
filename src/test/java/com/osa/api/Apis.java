@@ -69,36 +69,39 @@ public class Apis {
 		
 	   
 		HashMap<String,String> hm=new HashMap<String,String>();
-	    hm.put("firstName", "mahfuz");
-	    hm.put("lastName","ahmed");
-	    hm.put("phone","03/29/2022");
-	    hm.put("email", "mahfuz@gmail.com");
+	    hm.put("firstName", "qatar");
+	    hm.put("lastName","oman");
+	    hm.put("phone","11192022");
+	    hm.put("email", "football@gmail.com");
 	    String payload=Utilities.getJsonObject(hm).toString();
 
 	  
 		HashMap<String,String> hm1=new HashMap<String,String>();
-	    hm1.put("firstName", "aaaaa");
-	    hm1.put("lastName","bbbbbb");
-	    hm1.put("phone","06/15/2021");
-	    hm1.put("email", "vaccine@gmail.com");
+	    hm1.put("firstName", "brazil");
+	    hm1.put("lastName","argentina");
+	    hm1.put("phone","11192022");
+	    hm1.put("email", "goal@gmail.com");
 	    String payload_patch=Utilities.getJsonObject(hm1).toString();
 	    
 	    
 	    //POST
 	    AppContains.LOG.info("This is the POST call Payload "+Format.prettyPrint(payload));
 	    Response res_post=executeRequest("post","/customers",payload);
+	   // Response res_post=  POST("/customers",payload);
 	    AppContains.LOG.info("This is post response "+Format.prettyPrint(res_post));
 	    
+	    
+	    
 	    //GET
-	    String get_url="/customers/"+res_post.jsonPath().getString("_id");
+	    String get_url="/customers/"+res_post.jsonPath().get("_id");
 		//String get_url="/customers/"+"606c6d57e59e500017a120ac";            //with id
 		//String get_url="/de/"+ "24848";                                 //URL for zippotom
 	    AppContains.LOG.info("This is get call URL "+get_url);
-	    Response res_get=executeRequest("Get",get_url);
+	    Response res_get=executeRequest("get",get_url);
 	    AppContains.LOG.info("This is get call Response "+Format.prettyPrint(res_get));
 	    
 	    //PATCH
-	    String patch_url="/customers/"+res_get.jsonPath().getString("_id");
+	    String patch_url="/customers/"+res_post.jsonPath().get("_id");
 	   // String patch_url= "/customers/"+"606c6d57e59e500017a120ac";
 	    AppContains.LOG.info("This is the Patch call Payload "+Format.prettyPrint(payload_patch));
 	    AppContains.LOG.info("This is the Patch call URL "+patch_url);
@@ -106,7 +109,7 @@ public class Apis {
 	    AppContains.LOG.info("This is Patch call response "+Format.prettyPrint(res_patch));
 	    
 	  //GET
-		 String get_url1="/customers/"+res_post.jsonPath().getString("_id");
+		 String get_url1="/customers/"+res_patch.jsonPath().get("_id");
 	    // String get_url1=patch_url; //    "/customers/"+ "606ae9d8ea8f7d0017bc6e0c";
 		 AppContains.LOG.info("This is get call URL "+get_url1);
 		 Response res_get1=executeRequest("Get",get_url1);
@@ -154,8 +157,8 @@ public class Apis {
 	}
 	
 	public static Response GET(String endpoint) {
-		//RestAssured.baseURI=AppContains.BASE_URI;
-	    RestAssured.baseURI=AppContains.ZIPURL;
+		RestAssured.baseURI=AppContains.BASE_URI;
+	   // RestAssured.baseURI=AppContains.ZIPURL;
 		RequestSpecification request= RestAssured.given();
 		Response res=request.get(endpoint);
 		return res;

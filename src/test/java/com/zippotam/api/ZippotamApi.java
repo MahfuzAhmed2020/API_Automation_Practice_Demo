@@ -17,8 +17,8 @@ public class ZippotamApi {
         
        // RestAssured.baseURI=AppContains.ZIPURL; 
 	    RestAssured.baseURI=AppContains.BASE_URI; //osa 
-        Response response=RestAssured.given().when().get("/customers/"+"606c6d57e59e500017a120ac").then().statusCode(200).log().all().extract().response();
-        
+        Response response=RestAssured.given().when().get("/customers/"+"63797af60ce8440023518978").then().statusCode(200).log().all().extract().response();
+	   
         
 	//	AppContains.LOG.info("This is firstName "+response.path("firstName"));
 		
@@ -41,8 +41,10 @@ public class ZippotamApi {
 	}
 	public static Response GET(String endpoint) {
 		RestAssured.baseURI=AppContains.BASE_URI;
-	    
-		Response res=	RestAssured.given().when().get(endpoint).then().statusCode(200).log().all().extract().response();
+		RequestSpecification request= RestAssured.given();
+		//Response res=RestAssured.given().get(endpoint);
+		Response res=request.get(endpoint);
+		//Response res=	RestAssured.given().when().get(endpoint).then().statusCode(200).log().all().extract().response();
 		
 		return res;
 	}

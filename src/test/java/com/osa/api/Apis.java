@@ -132,6 +132,8 @@ public class Apis {
 			res=GET(url);
 		}else if(req.equals("post")) {
 			res=POST(url,payload);
+		}else if(req.equals("put")) {
+			res=PUT(url,payload);
 		}else if(req.equals("patch")) {
 			res=PATCH(url,payload);
 		}else if(req.equals("delete")) {
@@ -147,6 +149,8 @@ public class Apis {
 			res=GET(url);
 		}else if(req.equals("post")) {
 			res=POST(url,payload);
+		}else if(req.equals("put")) {
+			res=PUT(url,payload);
 		}else if(req.equals("patch")) {
 			res=PATCH(url,payload);
 		}else if(req.equals("delete")) {
@@ -157,9 +161,10 @@ public class Apis {
 	}
 	
 	public static Response GET(String endpoint) {
-		RestAssured.baseURI=AppContains.BASE_URI;
+		RestAssured.baseURI=AppContains.BASE_URI; // dr.get()="google.com"
 	   // RestAssured.baseURI=AppContains.ZIPURL;
 		RequestSpecification request= RestAssured.given();
+		
 		Response res=request.get(endpoint);
 		return res;
 	}
@@ -191,4 +196,11 @@ public class Apis {
 		return res;
 	}
 
+    public static Response PUT(String endpoint, String payload) {
+        return RestAssured.given()
+            .baseUri(AppContains.BASE_URI)
+            .contentType(ContentType.JSON)
+            .body(payload)
+            .put(endpoint);
+    }
 }

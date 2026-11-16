@@ -1,30 +1,24 @@
 package com.osa.api;
 
-import java.util.HashMap;
-
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.osa.utility.Utilities;
-
 import io.restassured.response.Response;
 
 public class Format {
-	public static void main(String[] args) {
-		HashMap<String,String> hm=new HashMap<String,String>();
-	    hm.put("firstName", "qatar");
-	    hm.put("lastName","oman");
-	    hm.put("phone","11192022");
-	    hm.put("email", "football@gmail.com");
-	    String payload=Utilities.getJsonObject(hm).toString();
-		System.out.println(prettyPrint(payload));
-	}
-	
-	public static String prettyPrint(Response res) {
-		JSONObject response=new JSONObject(res.asString());
-		return response.toString(4);	
-	}
-	public static String prettyPrint(String value) {
-		JSONObject response=new JSONObject(value);
-		return response.toString(4);
-	}
+    public static String prettyPrint(Response response) {
+        return prettyPrint(response.asString());
+    }
+
+    public static String prettyPrint(String value) {
+        if (value == null || value.trim().isEmpty()) return "<empty response>";
+        String trimmed = value.trim();
+        try {
+            if (trimmed.startsWith("{")) return new JSONObject(trimmed).toString(4);
+            if (trimmed.startsWith("[")) return new JSONArray(trimmed).toString(4);
+        } catch (JSONException ignored) {
+            // Logging must preserve non-JSON responses rather than fail the scenario.
+        }
+        return value;
+    }
 }

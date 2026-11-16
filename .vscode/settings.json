@@ -1,0 +1,8 @@
+{
+    "java.test.config": [
+        {
+            "name": "BankCRUD Local"
+        }
+    ],
+    "java.test.defaultConfig": "BankCRUD Local"
+}
